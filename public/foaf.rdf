@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<rdf:RDF xmlns:dc='http://purl.org/dc/elements/1.1' xmlns:fc='http://xmlns.com/foaf/corp#' xmlns:foaf='http://xmlns.com/foaf/0.1/' xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#' xmlns:rdfs='http://www.w3.org/2000/01/rdf-schema#'>
+  <foaf:Person rdf:ID='me'>
+    <foaf:familyName xml:lang='ja'>浦嶌</foaf:familyName>
+    <foaf:familyName xml:lang='en'>Urashima</foaf:familyName>
+    <foaf:givenName xml:lang='ja'>啓太</foaf:givenName>
+    <foaf:givenName xml:lang='en'>Keita</foaf:givenName>
+    <foaf:nick>ursm</foaf:nick>
+    <foaf:gender>male</foaf:gender>
+    <foaf:mbox rdf:resource='mailto:ursm@ursm.jp' />
+    <foaf:mbox rdf:resource='mailto:keita.ursm@gmail.com' />
+    <foaf:homepage rdf:resource='http://ursm.jp/' />
+    <foaf:weblog rdf:resource='http://d.hatena.ne.jp/ursm/' />
+    <foaf:workplaceHomepage rdf:resource='http://www.esm.co.jp/' />
+    <foaf:workInfoHomepage rdf:resource='http://ruby.agile.esm.co.jp/' />
+    <foaf:account>
+      <foaf:OnlineAccount>
+        <foaf:isPrimaryTopicOf rdf:resource='http://twitter.com/ursm' />
+      </foaf:OnlineAccount>
+    </foaf:account>
+    <foaf:account>
+      <foaf:OnlineAccount>
+        <foaf:isPrimaryTopicOf rdf:resource='https://www.google.com/profiles/keita.ursm' />
+      </foaf:OnlineAccount>
+    </foaf:account>
+    <rdfs:seeAlso rdf:resource='http://semantictweet.com/ursm' />
+    <rdfs:seeAlso rdf:resource='http://d.hatena.ne.jp/ursm/foaf' />
+  </foaf:Person>
+</rdf:RDF>

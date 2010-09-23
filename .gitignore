@@ -1,0 +1,4 @@
+public/css/*.css
+public/js/*.js
+vendor/bundle/*
+.bundle/*

@@ -1,0 +1,18 @@
+require 'pathname'
+APP_ROOT = Pathname.new(__FILE__).join('../..')
+
+Bluepill.application 'ursm.jp', :base_dir => APP_ROOT.join('tmp/pids') do |app|
+  app.process 'node' do |process|
+    process.working_dir = APP_ROOT
+    process.start_command = 'coffee run.coffee tmp/pids/socks/node.sock'
+    process.daemonize = true
+    process.stdout = process.stderr = APP_ROOT.join('log/node.log')
+  end
+
+  app.process 'ws' do |process|
+    process.working_dir = APP_ROOT
+    process.start_command = 'coffee run.coffee 8000'
+    process.daemonize = true
+    process.stdout = process.stderr = APP_ROOT.join('log/ws.log')
+  end
+end

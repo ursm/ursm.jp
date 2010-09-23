@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <title>RubyistのためのMongoDB入門 (#tork03 Edition)</title>
+    <style type='text/css'>
+      body {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 0 1em; }
+      
+      h2 {
+        margin-top: 1.5em; }
+      
+      p {
+        margin: 0.5em auto; }
+      
+      pre {
+        white-space: pre-wrap; }
+      
+      dl.quote {
+        width: 90%;
+        margin: 1em auto;
+        padding: 1em;
+        border: solid thin silver; }
+        dl.quote dd {
+          margin: 0;
+          padding: 0; }
+          dl.quote dd blockquote {
+            width: 100%;
+            margin: 0;
+            padding: 0; }
+        dl.quote dt {
+          text-align: right; }
+    </style>
+  </head>
+  <body>
+    <h1>RubyistのためのMongoDB入門 (<a href='http://regional.rubykaigi.org/tokyo03'>#tork03</a> Edition)</h1>
+    <section>
+      <h2>MongoDBとは</h2>
+      <p><a href='http://www.10gen.com/'>10gen</a>社が中心となって開発している非リレーショナルデータベース。</p>
+      <h3>特徴</h3>
+      <dl class='quote'>
+        <dd>
+          <blockquote cite='http://www.mongodb.org/display/DOCSJP/Home'>
+<p>MongoDBは("hu<b>mongo</b>us"より)は、スケーラブル、ハイパフォーマンス、オープンソース、スキーマフリー、ドキュメント指向です。C++で書かれていて、機能としては:</p>
+<ul>
+  <li>ドキュメント指向ストレージ (the simplicity and power of <a href="/display/DOCS/BSON" title="BSON">JSON-like</a> data schemas)</li>
+  <li>動的な <a href="/display/DOCS/Querying" title="Querying">クエリー</a></li>
+  <li>組み込みのオブジェクトと配列をサポートした完全な <a href="/display/DOCSJP/Index" title="Index">Index</a> のサポート。</li>
+  <li>クエリー <a href="/pages/viewpage.action?pageId=5799973" title="データベースプロファイラ">プロファイリング</a></li>
+  <li>速い <a href="http://blog.mongodb.org/post/248614779/fast-updates-with-mongodb-update-in-place">in-place アップデート</a></li>
+  <li>バイナリデータの効率的な保存 <a href="/display/DOCS/GridFS" title="GridFS">large objects</a> (例：写真や動画)</li>
+  <li><a href="/display/DOCS/Replication" title="Replication">レプリケーション</a> とフェイルオーバーのサポート。</li>
+  <li>クラウドレベルのスケーラビリティな <a href="/display/DOCSJP/Sharding" title="Sharding">自動的なsharding</a></li>
+  <li>複雑な集約のための <a href="/display/DOCSJP/MapReduce" title="MapReduce">MapReduce</a></li>
+  <li><a href="/display/DOCS/MongoDB+Commercial+Services+Providers" title="MongoDB Commercial Services Providers">商用サポート、ホスティング、コンサルティング</a></li>
+</ul>
+
+          </blockquote>
+        </dd>
+        <dt>
+          <cite>
+            <a href='http://www.mongodb.org/display/DOCSJP/Home'>Home - Docs-Japanese - 10gen Confluence</a>
+          </cite>
+        </dt>
+      </dl>
+      <p>リレーショナルデータベースと比較して:</p>
+      <ul>
+        <li>スキーマレス (各レコードがスキーマ情報を持つ=<strong>ドキュメント指向</strong>)</li>
+        <li>速い (参考: <a href='http://www.idiotsabound.com/did-i-mention-mongodb-is-fast-way-to-go-mongo'>Did I mention #MongoDb is fast?!?! Way to go @mongodb - Idiots Abound</a>)</li>
+        <li>ShardingやMapReduceでスケーラビリティもバッチリ</li>
+        <li>ただしトランザクションやjoinはない</li>
+      </ul>
+      <p>一般的なKVS (memcachedなど) と比較して:</p>
+      <ul>
+        <li>構造化されたデータを格納できる</li>
+        <li>高度なクエリをサポート (範囲検索など)</li>
+      </ul>
+      <p>→KVSの速度・スケーラビリティと、リレーショナルデータベースの機能性を併せ持つらしい</p>
+      <h3>実績</h3>
+      <p>
+        <a href='http://www.mongodb.org/display/DOCS/Production+Deployments'>Production Deployments - MongoDB - 10gen Confluence</a>
+      </p>
+      <ul>
+        <li>SourceForge</li>
+        <li>GitHub</li>
+        <li>The New York Times</li>
+        <li>etc...</li>
+      </ul>
+      <p>→結構色んなところで使われているらしい</p>
+    </section>
+    <section>
+      <h2>インストール</h2>
+      <p>
+        <a href='http://www.mongodb.org/display/DOCS/Downloads'>Downloads - MongoDB - 10gen Confluence</a>
+        から、環境に合ったバイナリをダウンロードしてください。
+      </p>
+      <dl>
+        <dt>1.2.x</dt>
+        <dd>安定版</dd>
+        <dt>1.3.x</dt>
+        <dd>開発版</dd>
+      </dl>
+      <h3>Rubyドライバ</h3>
+      <pre>$ gem install mongo</pre>
+    </section>
+    <section>
+      <h2>用語の説明</h2>
+      <dl>
+        <dt>データベース</dt>
+        <dd>いわゆるデータベース。</dd>
+        <dt>コレクション</dt>
+        <dd>テーブルに相当するもの。</dd>
+        <dt>ドキュメント</dt>
+        <dd>レコードに相当するもの。1つのドキュメントは1つのJSONオブジェクトで表現される。</dd>
+      </dl>
+    </section>
+    <section>
+      <h2>単体で使ってみる</h2>
+      <p>何はともあれMongoDBを起動します。</p>
+      <pre>$ tar xvf mongodb-osx-x86_64-1.2.3.tgz.tar
+      $ cd mongodb-osx-x86_64-1.2.3
+      $ mkdir ~/tmp/mongodb
+      $ bin/mongod --dbpath ~/tmp/mongodb</pre>
+      <p>別のターミナルでmongo shellを起動します。</p>
+      <pre>$ cd mongodb-osx-x86_64-1.2.3
+      $ bin/mongo</pre>
+      <p>
+        <a href='http://www.mongodb.org/display/DOCSJP/%E3%83%81%E3%83%A5%E3%83%BC%E3%83%88%E3%83%AA%E3%82%A2%E3%83%AB'>チュートリアル - Docs-Japanese - 10gen Confluence</a>
+      </p>
+    </section>
+    <section>
+      <h2>RubyとMongoDB</h2>
+      <p>
+        基本は
+        <a href='http://github.com/mongodb/mongo-ruby-driver'>mongo-ruby-driver</a>
+        。mongo shellレベルのバインディング。
+      </p>
+      <p>O/RマッパーならぬObject/Documentマッパーも複数存在する。</p>
+      <ul>
+        <li>
+          <a href='http://railstips.org/blog/archives/2009/06/27/mongomapper-the-rad-mongo-wrapper/'>MongoMapper</a>
+        </li>
+        <li>
+          <a href='http://mongoid.org/'>Mongoid</a>
+        </li>
+        <li>
+          <a href='http://github.com/leshill/mongodoc'>MongoDoc</a>
+        </li>
+      </ul>
+    </section>
+    <section>
+      <h2>今回作るもの</h2>
+      <p>
+        <img src='mongoblog.png' />
+      </p>
+      <p>使うもの:</p>
+      <ul>
+        <li>MongoMapper</li>
+        <li>Sinatra</li>
+        <li>Haml</li>
+        <li>Shotgun</li>
+      </ul>
+      <pre>$ gem install mongo_mapper sinatra haml shotgun</pre>
+    </section>
+    <section>
+      <h2>モデルをつくる</h2>
+      <p>blog.rbという名前でファイルを作ります。</p>
+      <pre>require 'rubygems'&#x000A;require 'mongo_mapper'&#x000A;&#x000A;MongoMapper.database = 'blog'&#x000A;&#x000A;class Post&#x000A;  include MongoMapper::Document&#x000A;&#x000A;  key :title, String, :required => true&#x000A;  key :body, String, :required => true&#x000A;  timestamps! #=> created_at, updated_at&#x000A;&#x000A;  ensure_index :created_at&#x000A;end&#x000A;</pre>
+    </section>
+    <section>
+      <h2>irbから使ってみる</h2>
+      <p>
+        See:
+        <a href='http://railstips.org/blog/archives/2009/06/27/mongomapper-the-rad-mongo-wrapper/'>MongoMapper, The Rad Mongo Wrapper</a>
+      </p>
+      <h3>ドキュメントの作成</h3>
+      <pre>$ irb -rblog&#x000A;&gt;&gt; Post.create!(:title =&gt; 'hello', :body =&gt; 'world')&#x000A;=&gt; #&lt;Post created_at: Sun Feb 28 01:56:23 UTC 2010, body: "world", title: "hello", updated_at: Sun Feb 28 01:56:23 UTC 2010, _id: 4b89cd470e962b03f3000001&gt;&#x000A;&gt;&gt; Post.create!&#x000A;MongoMapper::DocumentNotValid: Validation failed: Body can't be empty, Title can't be empty&#x000A;        from /Gentoo/usr/lib/ruby/gems/1.8/gems/mongo_mapper-0.7.0/lib/mongo_mapper/document.rb:369:in `save!'&#x000A;        ...&#x000A;&gt;&gt; Post.create!(:title =&gt; 'こんにちはこんにちは', :body =&gt; 'MongoDBからこんにちは!')&#x000A;=&gt; #&lt;Post created_at: Sun Feb 28 02:05:01 UTC 2010, body: "MongoDB\343\201\213\343\202\211\343\201\223\343\202\223\343\201\253\343\201\241\343\201\257!", title: "\343\201\223\343\202\223\343\201\253\343\201\241\343\201\257\343\201\223\343\202\223\343\201\253\343\201\241\343\201\257", updated_at: Sun Feb 28 02:05:01 UTC 2010, _id: 4b89cf4d0e962b03f3000003&gt;&#x000A;</pre>
+      <h3>ドキュメントの検索</h3>
+      <pre>&gt;&gt; Post.first&#x000A;=&gt; #&lt;Post created_at: Sun Feb 28 01:56:23 UTC 2010, body: "world", title: "hello", updated_at: Sun Feb 28 01:56:23 UTC 2010, _id: 4b89cd470e962b03f3000001&gt;&#x000A;&gt;&gt; Post.first(:title =&gt; 'hello')&#x000A;=&gt; #&lt;Post created_at: Sun Feb 28 01:56:23 UTC 2010, body: "world", title: "hello", updated_at: Sun Feb 28 01:56:23 UTC 2010, _id: 4b89cd470e962b03f3000001&gt;&#x000A;&gt;&gt; Post.all(:body =&gt; /mongodb/i)&#x000A;=&gt; [#&lt;Post created_at: Sun Feb 28 02:05:01 UTC 2010, body: "MongoDB\343\201\213\343\202\211\343\201\223\343\202\223\343\201\253\343\201\241\343\201\257!", title: "\343\201\223\343\202\223\343\201\253\343\201\241\343\201\257\343\201\223\343\202\223\343\201\253\343\201\241\343\201\257", updated_at: Sun Feb 28 02:05:01 UTC 2010, _id: 4b89cf4d0e962b03f3000003&gt;]&#x000A;</pre>
+    </section>
+    <section>
+      <h2>一覧画面をつくる</h2>
+      <p>blog.rb (つづき):</p>
+      <pre>require 'sinatra'&#x000A;require 'haml'&#x000A;&#x000A;set :haml, :escape_html =&gt; true&#x000A;&#x000A;get '/posts' do&#x000A;  @posts = Post.all(:order =&gt; 'created_at DESC')&#x000A;  haml :posts&#x000A;end</pre>
+      <p>views/posts.haml:</p>
+      <pre>%h1 MongoBlog&#x000A;%p&#x000A;  %a(href='/posts/new') New Post&#x000A;&#x000A;- @posts.each do |post|&#x000A;  .post&#x000A;    %h2= post.title&#x000A;    %p= post.body&#x000A;    %p.created_at= post.created_at.to_s(:db)</pre>
+      <p>アプリケーションを起動して…</p>
+      <pre>$ shotgun blog.rb</pre>
+      <p><a href='http://localhost:9393/posts'>http://localhost:9393/posts</a> を見てみる</p>
+    </section>
+    <section>
+      <h2>投稿画面をつくる</h2>
+      <p>blog.rb:</p>
+      <pre>get '/posts/new' do&#x000A;  @post = Post.new&#x000A;  haml :new&#x000A;end&#x000A; &#x000A;post '/posts' do&#x000A;  @post = Post.new(params[:post])&#x000A; &#x000A;  if @post.save&#x000A;    redirect '/posts'&#x000A;  else&#x000A;    haml :new&#x000A;  end&#x000A;end&#x000A;</pre>
+      <p>views/new.haml:</p>
+      <pre>%ul.errors&#x000A;  - @post.errors.full_messages.each do |e|&#x000A;    %li= e&#x000A;&#x000A;%form.post(action='/posts' method='post')&#x000A;  %dl&#x000A;    %dt Title&#x000A;    %dd&#x000A;      %input(name='post[title]' type='text'){:value => @post.title}&#x000A;    %dt Body&#x000A;    %dd&#x000A;      %textarea(name='post[body]')!= @post.body&#x000A;&#x000A;  .actions&#x000A;    %input(type='submit' value='Post')&#x000A;</pre>
+    </section>
+    <section>
+      <h2>参考リンク</h2>
+      <ul>
+        <li>
+          <a href='http://github.com/ursm/mongoblog'>ursm's mongoblog at master - GitHub</a>
+          (今日作ったブログアプリの完成版です)
+        </li>
+        <li>
+          <a href='http://www.mongodb.org/display/DOCS/Home'>公式ドキュメント</a>
+          (<a href='http://www.mongodb.org/display/DOCSJP/Home'>日本語訳</a>)
+        </li>
+        <li>
+          <a href='http://blog.madoro.org/mn/54'>なぜMongoDBなのか - Masatomo Nakano Blog</a>
+        </li>
+        <li>
+          <a href='http://blog.madoro.org/mn/52'>MongoDBを今日から始めるためのドキュメント - Masatomo Nakano Blog</a>
+        </li>
+      </ul>
+    </section>
+    <section>
+      <p>ご参加いただいた皆さま、ありがとうございました!</p>
+    </section>
+  </body>
+</html>
