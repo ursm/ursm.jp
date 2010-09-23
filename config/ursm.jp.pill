@@ -6,6 +6,7 @@ Bluepill.application 'ursm.jp', :base_dir => APP_ROOT.join('tmp/pids') do |app|
     process.working_dir = APP_ROOT
     process.start_command = 'coffee run.coffee tmp/pids/socks/node.sock'
     process.daemonize = true
+    process.environment = {:EXPRESS_ENV => 'production'}
     process.stdout = process.stderr = APP_ROOT.join('log/node.log')
   end
 
@@ -13,6 +14,7 @@ Bluepill.application 'ursm.jp', :base_dir => APP_ROOT.join('tmp/pids') do |app|
     process.working_dir = APP_ROOT
     process.start_command = 'coffee run.coffee 8000'
     process.daemonize = true
+    process.environment = {:EXPRESS_ENV => 'production'}
     process.stdout = process.stderr = APP_ROOT.join('log/ws.log')
   end
 end
