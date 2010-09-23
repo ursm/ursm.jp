@@ -5,6 +5,7 @@ app = module.exports = express.createServer()
 app.configure ->
   app.use express.compiler(src: "#{__dirname}/src", dest: "#{__dirname}/public", enable: ['sass', 'coffeescript'])
   app.use express.staticProvider("#{__dirname}/public")
+  app.use express.logger()
 
   app.set 'view engine', 'haml'
   app.set 'view options', layout: false
