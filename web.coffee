@@ -4,7 +4,7 @@ express = require('express')
 app = module.exports = express.createServer()
 
 app.configure ->
-  root = (paths...) -> path.join(__dirname, '..', paths...)
+  root = (paths...) -> path.join(__dirname, paths...)
 
   app.use express.compiler(src: root('src'), dest: root('public'), enable: ['sass', 'coffeescript'])
   app.use express.staticProvider(root('public'))
@@ -20,13 +20,5 @@ app.configure 'production', ->
   app.use express.errorHandler()
   app.use express.logger(buffer: true)
 
-
 app.get '/', (req, res) ->
   res.render 'index'
-
-
-require('./socket').listen app
-
-unless module.parent
-  app.listen 3000
-  console.log "Express server listening on port #{app.address().port}"
