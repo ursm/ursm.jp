@@ -2,39 +2,40 @@
 
 %html
   %head
-    %meta(charset='utf-8')
+    %meta{charset:'utf-8'}
     %title ursm.jp
-    :css
-      @-webkit-keyframes blink {
-        from { opacity: 0; }
-        50%  { opacity: 0.8; }
-        to   { opacity: 0; }
-      }
-    %link(rel='stylesheet' href='/css/index.css')
-    %link(rel='meta' href='/foaf.rdf' title='FOAF')/
-    %link(rel='openid.server' href='http://www.myopenid.com/server')/
-    %link(rel='openid.delegate' href='http://ursm.myopenid.com/')/
-    %link(rel='openid2.local_id' href='http://ursm.myopenid.com')/
-    %link(rel='openid2.provider' href='http://www.myopenid.com/server')/
-    %meta(http-equiv='X-XRDS-Location' content='http://www.myopenid.com/xrds?username=ursm.myopenid.com')/
-    %script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js')
-    %script(src='http://cdn.socket.io/stable/socket.io.js')
-    %script(src='/js/index.js')
+    %style{type:'text/css'}
+      :plain
+        @-webkit-keyframes blink {
+          from { opacity: 0; }
+          50%  { opacity: 0.8; }
+          to   { opacity: 0; }
+        }
+    %link{rel:'stylesheet', href:'/css/index.css'}
+    %link{rel:'meta', href:'/foaf.rdf', title:'FOAF'}
+    %link{rel:'openid.server', href:'http://www.myopenid.com/server'}
+    %link{rel:'openid.delegate', href:'http://ursm.myopenid.com/'}
+    %link{rel:'openid2.local_id', href:'http://ursm.myopenid.com'}
+    %link{rel:'openid2.provider', href:'http://www.myopenid.com/server'}
+    %meta{'http-equiv':'X-XRDS-Location', content:'http://www.myopenid.com/xrds?username:ursm.myopenid.com'}
+    %script{src:'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'}
+    %script{src:'http://cdn.socket.io/stable/socket.io.js'}
+    %script{src:'/js/index.js'}
 
   %body
     %h1 ursm.jp
     %ul
       %li
-        %a(href='http://d.hatena.ne.jp/ursm/' rel='me') Blog
+        %a{href:'http://d.hatena.ne.jp/ursm/', rel:'me'} Blog
       %li
-        %a(href='http://twitter.com/ursm' rel='me') Twitter
+        %a{href:'http://twitter.com/ursm', rel:'me'} Twitter
       %li
-        %a(href='http://friendfeed.com/ursm' rel='me') FriendFeed
+        %a{href:'http://friendfeed.com/ursm', rel:'me'} FriendFeed
       %li
-        %a(href='http://delicious.com/ursm' rel='me') Delicious
+        %a{href:'http://delicious.com/ursm', rel:'me'} Delicious
       %li
-        %a(href='http://github.com/ursm' rel='me') GitHub
+        %a{href:'http://github.com/ursm', rel:'me'} GitHub
       %li
-        %a(href='http://www.google.com/profiles/keita.ursm' rel='me') Google Profile
+        %a{href:'http://www.google.com/profiles/keita.ursm', rel:'me'} Google Profile
     %p
-      %a(href='/foaf.rdf' rel='me') FOAF
+      %a{href:'/foaf.rdf', rel:'me'} FOAF

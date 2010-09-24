@@ -27,4 +27,8 @@ namespace :deploy do
     stop
     start
   end
+
+  task :status do
+    bluepill :status
+  end
 end

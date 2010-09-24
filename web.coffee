@@ -6,6 +6,7 @@ root = (paths...) -> path.join(__dirname, paths...)
 app = module.exports = express.createServer()
 
 app.configure ->
+  app.register '.haml', require('hamljs')
   app.use express.compiler(src: root('src'), dest: root('public'), enable: ['sass', 'coffeescript'])
   app.set 'view engine', 'haml'
   app.set 'view options', layout: false
