@@ -24,6 +24,7 @@ namespace :deploy do
   end
 
   task :restart, :roles => :app, :except => {:no_release => true} do
-    bluepill :restart
+    stop
+    start
   end
 end
