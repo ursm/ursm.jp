@@ -3,7 +3,7 @@ require 'bundler/capistrano'
 set :application, 'ursm.jp'
 
 set :scm, :git
-set :repository,  'git@macbook:ursm.jp'
+set :repository, File.expand_path('../..', __FILE__)
 set :deploy_via, :copy
 
 server 'macbook', :web, :app, :db, :primary => true
