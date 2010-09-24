@@ -1,18 +1,17 @@
 path = require('path')
 express = require('express')
 
+root = (paths...) -> path.join(__dirname, paths...)
+
 app = module.exports = express.createServer()
 
 app.configure ->
-  root = (paths...) -> path.join(__dirname, paths...)
-
   app.use express.compiler(src: root('src'), dest: root('public'), enable: ['sass', 'coffeescript'])
-  app.use express.staticProvider(root('public'))
-
   app.set 'view engine', 'haml'
   app.set 'view options', layout: false
 
 app.configure 'development', ->
+  app.use express.staticProvider(root('public'))
   app.use express.errorHandler(dumpExceptions: true, showStack: true)
   app.use express.logger()
 
