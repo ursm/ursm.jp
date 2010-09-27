@@ -1,2 +1,2 @@
-web = module.exports = require('./web')
-require('./socket').listen web
+web = module.exports = require('./servers/web')
+require('./servers/socket').listen web

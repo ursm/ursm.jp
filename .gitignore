@@ -1,4 +1,4 @@
-public/css/*.css
-public/js/*.js
+public/stylesheets/*.css
+public/javascripts/*.js
 vendor/bundle/*
 .bundle/*

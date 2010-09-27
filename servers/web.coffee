@@ -1,7 +1,7 @@
 path = require('path')
 express = require('express')
 
-root = (paths...) -> path.join(__dirname, paths...)
+root = (paths...) -> path.join(__dirname, '..', paths...)
 
 app = module.exports = express.createServer()
 
