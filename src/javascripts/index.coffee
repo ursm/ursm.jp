@@ -30,9 +30,14 @@ $(document).ready ->
       when 'mousemove'
         firefly.encage cage unless firefly.isCaged()
         firefly.flyTo data
-      when 'disconnect'
+      when 'mouseleave', 'disconnect'
         firefly.uncage()
       else
         console.log event, client, data
 
-  $('html').mousemove (e) -> socket.send JSON.stringify(['mousemove', top: e.pageY, left: e.pageX])
+  send = (event, data) -> socket.send JSON.stringify([event, data])
+
+  $('html').mousemove (e) ->
+    send 'mousemove', top: e.pageY, left: e.pageX
+  .mouseleave ->
+    send 'mouseleave'
