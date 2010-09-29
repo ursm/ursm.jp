@@ -32,3 +32,7 @@ namespace :deploy do
     bluepill :status
   end
 end
+
+after 'deploy:update_code' do
+  run "cd #{latest_release} && git submodule update --init --recursive"
+end

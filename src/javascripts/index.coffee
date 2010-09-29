@@ -8,6 +8,8 @@ class Firefly
   encage: (cage) ->
     @elem = $("<div class='firefly' id='c#{@id}' />").css(
       'background-image': "-webkit-gradient(radial, center center, 5, center center, 15, from(hsla(#{@id % 360}, 100%, 70%, 1)), to(hsla(0, 100%, 100%, 0)))"
+    ).css(
+      'background-image': "-moz-radial-gradient(circle contain, hsla(#{@id % 360}, 100%, 70%, 1) 0%, hsla(0, 100%, 100%, 0) 100%)"
     ).appendTo(cage)
 
   flyTo: (pos) ->

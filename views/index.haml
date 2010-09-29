@@ -19,7 +19,9 @@
     %link{rel:'openid2.provider', href:'http://www.myopenid.com/server'}
     %meta{'http-equiv':'X-XRDS-Location', content:'http://www.myopenid.com/xrds?username:ursm.myopenid.com'}
     %script{src:'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'}
-    %script{src:'http://cdn.socket.io/stable/socket.io.js'}
+    :javascript
+      WEB_SOCKET_SWF_LOCATION = '/socket.io/lib/vendor/web-socket-js/WebSocketMain.swf'
+    %script{src:'/socket.io/socket.io.js'}
     %script{src:'/javascripts/index.js'}
 
   %body
