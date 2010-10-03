@@ -12,11 +12,11 @@ set :use_sudo, false
 
 namespace :deploy do
   def bluepill(*args)
-    run "cd #{current_release} && bundle exec bluepill #{args.join(' ')} --base-dir=tmp/pids --no-privileged"
+    run "cd #{current_release} && script/bluepill #{args.join(' ')}"
   end
 
   task :start, :roles => :app, :except => {:no_release => true} do
-    bluepill "load config/#{application}.pill"
+    bluepill 'load config/bluepill.rb'
   end
 
   task :stop, :roles => :app, :except => {:no_release => true} do
@@ -30,6 +30,10 @@ namespace :deploy do
 
   task :status do
     bluepill :status
+  end
+
+  task :log do
+    bluepill :log
   end
 end
 
