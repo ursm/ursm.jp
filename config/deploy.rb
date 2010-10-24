@@ -1,4 +1,9 @@
+$:.unshift File.expand_path('./lib', ENV['rvm_path'])
+require 'rvm/capistrano'
 require 'bundler/capistrano'
+
+set :rvm_bin_path, '/opt/rvm/bin'
+set :rvm_ruby_string, '1.9.2'
 
 set :application, 'ursm.jp'
 
