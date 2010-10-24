@@ -1,9 +1,9 @@
 GEM
   remote: http://rubygems.org/
   specs:
-    activesupport (3.0.0)
+    activesupport (3.0.1)
     blankslate (2.1.2.3)
-    bluepill (0.0.43)
+    bluepill (0.0.44)
       activesupport (>= 2.3.4)
       blankslate (>= 2.1.2.2)
       daemons (>= 1.0.9)
