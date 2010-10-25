@@ -11,7 +11,7 @@ set :scm, :git
 set :repository, File.expand_path('../..', __FILE__)
 set :deploy_via, :copy
 
-server 'macbook', :web, :app, :db, :primary => true
+server 'ursm.jp', :web, :app, :db, :primary => true
 set :deploy_to, "/home/ursm/apps/#{application}"
 set :use_sudo, false
 
